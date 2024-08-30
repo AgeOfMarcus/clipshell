@@ -1,10 +1,11 @@
 from subprocess import Popen, PIPE
+import clipboard
 import os, time
 
 sh = lambda cmd: Popen(cmd,stdout=PIPE,shell=True).communicate()[0].strip()
 
-read = lambda: sh("xsel -b").decode()
-write = lambda x: os.system("echo -n \"%s\" | xsel -b" % x)
+read = clipboard.paste
+write = clipboard.copy
 
 def fdecode(x):
 	try:
